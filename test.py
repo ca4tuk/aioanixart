@@ -6,11 +6,16 @@ anixart = Anixart()
 
 
 async def main():
-    # запрос профиля
-    user_profile = await anixart.profile.view(1)
+    # поиск пользователей
+    # возвращает [], если поиск не принес результатов.
+    profiles = await anixart.profile.search("ca4tuk")
+    print([profile.to_dict() for profile in profiles["content"]])
+
+    # просмотр профиля
+    user_profile = await anixart.profile.view(profiles["content"][0].user_id)
     print(user_profile.to_dict())
 
-    # запрос истории никнеймов пользователя
+    # просмотр истории никнеймов пользователя
     # тестовый вариант.
     user_nickname_history = await anixart.profile.nickname_history(1)
     print(user_nickname_history)
@@ -24,7 +29,7 @@ async def main():
     random_release = await anixart.release.random()
     print(random_release.to_dict())
 
-    # запрос конкретного релиза по release_id
+    # просмотр конкретного релиза по release_id
     # возвращает AnixartAPIError, если указанный релиз не найден.
     release = await anixart.release.view(2956)  # ID: Вторжение
     print(release.to_dict())

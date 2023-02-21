@@ -43,6 +43,9 @@ class AnixartUser:
     def to_dict(self):
         return self.__dict__
 
+    def __str__(self):
+        return str(self.__dict__)
+
 
 class AnixartRelease:
     """Объект релиза"""
@@ -59,11 +62,11 @@ class AnixartRelease:
         self.author = payload.get("author")
         self.translators = payload.get("translators")
         self.description = payload.get("description")
-        self.category_id = payload.get("category_id")
-        self.category_name = payload.get("category_name")
+        self.category_id = payload.get("category", {}).get("id")
+        self.category_name = payload.get("category", {}).get("name")
         self.rating = payload.get("grade")
-        self.status_id = payload.get("status_id")
-        self.status_name = payload.get("status_name")
+        self.status_id = payload.get("status", {}).get("id")
+        self.status_name = payload.get("status", {}).get("name")
         self.duration = payload.get("duration")
         self.season = payload.get("season")
         self.screenshots = payload.get("screenshots")
@@ -98,6 +101,7 @@ class AnixartComment:
         self.message = payload.get("message")
         self.timestamp = payload.get("timestamp")
         self.likes_count = payload.get("likes_count")
+        self.is_spoiler = payload.get("is_spoiler")
 
     def to_dict(self):
         return self.__dict__
