@@ -4,7 +4,6 @@ from .release import AnixartReleases
 
 class Anixart:
     def __init__(self):
-        self.me = None
         self.__profile = AnixartProfile()
         self.__release = AnixartReleases()
 
