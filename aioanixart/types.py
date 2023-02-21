@@ -85,6 +85,9 @@ class AnixartRelease:
     def to_dict(self):
         return self.__dict__
 
+    def __str__(self):
+        return str(self.__dict__)
+
 
 class AnixartComment:
     """Объект комментария"""
@@ -98,6 +101,9 @@ class AnixartComment:
 
     def to_dict(self):
         return self.__dict__
+
+    def __str__(self):
+        return str(self.__dict__)
 
 
 class AnixartCollection:  # TODO: *
