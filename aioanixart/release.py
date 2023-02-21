@@ -5,15 +5,10 @@ from .types import AnixartRelease
 from .endpoints import SEARCH_RELEASE, RELEASE_RANDOM
 
 
-class AnixartReleasesBase(AnixartRequester):
+class AnixartReleases:
     def __init__(self):
-        super(AnixartReleasesBase, self).__init__()
-        self._execute = super().execute
-
-
-class AnixartReleases(AnixartReleasesBase):
-    def __init__(self):
-        super(AnixartReleases, self).__init__()
+        __AnixartRequester = AnixartRequester()
+        self._execute = __AnixartRequester.execute
 
     async def search(self, query: str, page: int = 0):
         """

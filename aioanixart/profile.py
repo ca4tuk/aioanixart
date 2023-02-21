@@ -5,15 +5,10 @@ from .types import AnixartUser
 from .endpoints import PROFILE, PROFILE_NICK_HISTORY
 
 
-class AnixartProfileBase(AnixartRequester):
+class AnixartProfile:
     def __init__(self):
-        super(AnixartProfileBase, self).__init__()
-        self._execute = super().execute
-
-
-class AnixartProfile(AnixartProfileBase):
-    def __init__(self):
-        super(AnixartProfile, self).__init__()
+        __AnixartRequester = AnixartRequester()
+        self._execute = __AnixartRequester.execute
 
     async def view(self, user_id: int) -> AnixartUser:
         """
