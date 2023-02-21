@@ -6,6 +6,7 @@ class Anixart:
     """
     Anixart API class object.
     """
+
     def __init__(self):
         self.__profile = AnixartProfile()
         self.__release = AnixartReleases()

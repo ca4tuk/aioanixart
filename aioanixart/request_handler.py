@@ -12,7 +12,6 @@ class AnixartRequester:
     async def execute(self, method: str, endpoint: str, payload: dict = None):
         method = method.upper()
 
-
         if method == "GET":
             response = await self.get(endpoint, payload)
             return response
@@ -41,4 +40,3 @@ class AnixartRequester:
                 raise AnixartAPIError(f"Сервер вернул отрицательный ответ: {response.status}")
 
             return response
-

@@ -15,8 +15,8 @@ async def main():
     print(user_nickname_history)
 
     # поиск релиза по названию
-    search = await anixart.release.search("ID: Вторжение")
-    print([release.to_dict() for release in search])
+    search = await anixart.release.search("ID Вторжение")
+    print([release.to_dict() for release in search["content"]])
 
     # запрос рандомного релиза
     random_release = await anixart.release.random()

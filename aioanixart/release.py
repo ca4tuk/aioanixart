@@ -21,13 +21,14 @@ class AnixartReleases:
         :return: list
         """
 
-        result = []
-
         payload = {"query": query, "searchBy": 0}
         response = await (await self._execute("POST", SEARCH_RELEASE.format(page), payload=payload)).json()
 
+        result = {"content": [], "total_count": response.get("total_count"),
+                  "current_page": response.get("current_page"), "total_page_count": response.get("total_page_count")}
+
         for release in response.get("content", []):
-            result.append(AnixartRelease(release))
+            result["content"].append(AnixartRelease(release))
 
         return result
 

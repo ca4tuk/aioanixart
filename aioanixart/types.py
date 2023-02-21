@@ -45,12 +45,12 @@ class AnixartUser:
 
 
 class AnixartRelease:
-    """Объект тайтла"""
+    """Объект релиза"""
 
     def __init__(self, payload):
-        self.release_id = payload.get("release_id")
+        self.release_id = payload.get("id")
         self.poster = payload.get("poster")
-        self.poster_image = payload.get("poster_image")
+        self.poster_image = payload.get("image")
         self.year = payload.get("year")
         self.genres = payload.get("genres")
         self.country = payload.get("country")

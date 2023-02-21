@@ -18,7 +18,7 @@ class AnixartProfile:
         response = await (await self._execute("GET", PROFILE.format(user_id))).json()
         return AnixartUser(response.get("profile"))
 
-    async def nickname_history(self, user_id: int, page: int = 0) -> dict:
+    async def nickname_history(self, user_id: int, page: int = 0) -> dict:  # TODO: *
         """
         :param user_id: user_id
         :param page: page_number
