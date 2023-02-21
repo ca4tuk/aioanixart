@@ -1,5 +1,6 @@
-from .profile import AnixartProfile
+from .profile import AnixartProfiles
 from .release import AnixartReleases
+from .collections import AnixartCollections
 
 
 class Anixart:
@@ -8,8 +9,9 @@ class Anixart:
     """
 
     def __init__(self):
-        self.__profile = AnixartProfile()
+        self.__profile = AnixartProfiles()
         self.__release = AnixartReleases()
+        self.__collection = AnixartCollections()
 
     @property
     def profile(self):
@@ -18,3 +20,7 @@ class Anixart:
     @property
     def release(self):
         return self.__release
+
+    @property
+    def collection(self):
+        return self.__collection

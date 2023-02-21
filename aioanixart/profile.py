@@ -7,7 +7,7 @@ from .endpoints import PROFILE, SEARCH_PROFILE, PROFILE_NICK_HISTORY
 from .exceptions import AnixartAPIError
 
 
-class AnixartProfile:
+class AnixartProfiles:
     def __init__(self):
         __AnixartRequester = AnixartRequester()
         self._execute = __AnixartRequester.execute
@@ -25,7 +25,7 @@ class AnixartProfile:
 
         return result
 
-    async def nickname_history(self, user_id: int, page: int = 0) -> dict:  # TODO: *
+    async def nickname_history(self, user_id: int, page: int = 0) -> dict:  # TODO: rework
         """
         :param user_id: user_id
         :param page: page_number
@@ -49,10 +49,8 @@ class AnixartProfile:
         payload = {"query": query, "searchBy": 0}
         response = await (await self._execute("POST", SEARCH_PROFILE.format(page), payload=payload)).json()
 
-        result = {"content": [], "total_count": response.get("total_count"),
-                  "current_page": response.get("current_page"), "total_page_count": response.get("total_page_count")}
-
-        for user in response.get("content"):
-            result["content"].append(AnixartUser(user))
+        result = {"content": [AnixartUser(user) for user in response.get("content", [])],
+                  "total_count": response.get("total_count"), "current_page": response.get("current_page"),
+                  "total_page_count": response.get("total_page_count")}
 
         return result

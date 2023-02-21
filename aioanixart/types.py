@@ -113,5 +113,16 @@ class AnixartComment:
 class AnixartCollection:  # TODO: *
     """Объект коллекции"""
 
-    def __init__(self):
-        pass
+    def __init__(self, payload):
+        self.collection_id = payload.get("id")
+        self.creator = AnixartUser(payload.get("creator", {}))
+        self.title = payload.get("title")
+        self.description = payload.get("description")
+        self.image = payload.get("image")
+        self.releases = payload.get("releases")
+        self.creation_date = payload.get("creation_date")
+        self.last_update_date = payload.get("last_update_date")
+        self.comment_count = payload.get("comment_count")
+
+    def to_dict(self):
+        return self.__dict__

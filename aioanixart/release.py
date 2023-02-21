@@ -26,11 +26,9 @@ class AnixartReleases:
         payload = {"query": query, "searchBy": 0}
         response = await (await self._execute("POST", SEARCH_RELEASE.format(page), payload=payload)).json()
 
-        result = {"content": [], "total_count": response.get("total_count"),
-                  "current_page": response.get("current_page"), "total_page_count": response.get("total_page_count")}
-
-        for release in response.get("content", []):
-            result["content"].append(AnixartRelease(release))
+        result = {"content": [AnixartRelease(release) for release in response.get("content")],
+                  "total_count": response.get("total_count"), "current_page": response.get("current_page"),
+                  "total_page_count": response.get("total_page_count")}
 
         return result
 
@@ -74,6 +72,8 @@ class AnixartReleases:
         """
 
         response = await (await self._execute("GET", RELEASE_COMMENTS.format(release_id, page))).json()
-        result = [AnixartComment(comment) for comment in response.get("content", [])]
+        result = {"content": [AnixartComment(comment) for comment in response.get("content", [])],
+                  "total_count": response.get("total_count"), "total_page_count": response.get("total_page_count"),
+                  "current_page": response.get("current_page")}
 
         return result
