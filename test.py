@@ -22,8 +22,8 @@ async def main():
 
     # поиск релиза по названию
     # возвращает [], если поиск не принес результатов.
-    search = await anixart.release.search("ИД: Вторжение")
-    print([release.to_dict() for release in search["content"]])
+    release_search = await anixart.release.search("ИД: Вторжение")
+    print([release.to_dict() for release in release_search["content"]])
 
     # запрос рандомного релиза
     random_release = await anixart.release.random()
@@ -38,6 +38,7 @@ async def main():
     # возвращает [], если комментариев нет.
     release_comments = await anixart.release.get_comments(2956)
     print([comment.to_dict() for comment in release_comments])
+
 
 
 if __name__ == "__main__":

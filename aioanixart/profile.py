@@ -4,6 +4,8 @@ from .types import AnixartUser
 
 from .endpoints import PROFILE, SEARCH_PROFILE, PROFILE_NICK_HISTORY
 
+from .exceptions import AnixartAPIError
+
 
 class AnixartProfile:
     def __init__(self):
@@ -17,6 +19,8 @@ class AnixartProfile:
         """
 
         response = await (await self._execute("GET", PROFILE.format(user_id))).json()
+        if response.get("code") != 0:
+            raise AnixartAPIError("Указанный пользователь не найден.")
         result = AnixartUser(response.get("profile"))
 
         return result
