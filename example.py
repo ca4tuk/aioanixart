@@ -46,7 +46,10 @@ async def main():
     # Запрос комментариев релиза по release_id:
     # возвращает dict, комментарии находятся в ключе content
     # если комментариев нет, ключ content будет содержать пустой список.
-    release_comments = await anixart.release.get_comments(2956)
+    # Также, следует подметить, что обычный просмотр релиза (будь то рандомный релиз, или конкретный по release_id),
+    # возвращает не всё доступные комментарии с первой страницы, поэтому вызов этого метода не бесполезен.
+    # *это касается и коллекций.
+    release_comments = await anixart.release.get_comments(2956, page=1)
     print([comment.to_dict() for comment in release_comments["content"]])
 
     # Просмотр конкретной коллекции по collection_id:

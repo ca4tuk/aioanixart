@@ -14,8 +14,15 @@ class AnixartProfiles:
 
     async def view(self, user_id: int) -> AnixartUser:
         """
-        :param user_id:
-        :return:
+        Возвращает объект AnixartUser, содержащий информацию о пользователе с указанным идентификатором.
+
+        :param user_id: Целочисленный идентификатор пользователя.
+        :type user_id: int
+
+        :return: Объект AnixartUser, содержащий информацию о пользователе.
+        :rtype: AnixartUser
+
+        :raises AnixartAPIError: Если пользователь с указанным идентификатором не найден.
         """
 
         response = await (await self._execute("GET", PROFILE.format(user_id))).json()
@@ -26,24 +33,24 @@ class AnixartProfiles:
         return result
 
     async def nickname_history(self, user_id: int, page: int = 0) -> dict:  # TODO: rework
-        """
-        :param user_id: user_id
-        :param page: page_number
-
-        :type user_id: int
-        :type page: int
-        :return:
-        """
+        """не используйте это пж"""
 
         response = await (await self._execute("GET", PROFILE_NICK_HISTORY.format(user_id, page))).json()
         return response
 
-    async def search(self, query: str, page: int = 0):
+    async def search(self, query: str, page: int = 0) -> dict:
         """
+        Поиск пользователей по заданному запросу.
 
-        :param query: search query
-        :param page: page count
-        :return:
+        :param query: Строка запроса.
+        :type query: str
+
+        :param page: Номер страницы с результатами поиска.
+        :type page: int
+
+        :return: Словарь, содержащий список найденных пользователей, общее количество найденных пользователей,
+                 текущую страницу и общее количество страниц с результатами.
+        :rtype: dict
         """
 
         payload = {"query": query, "searchBy": 0}
